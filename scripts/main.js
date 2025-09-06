@@ -18,23 +18,30 @@ const showAllPlants = (plants) => {
       "rounded-lg",
       "max-w-sm",
       "sm:max-w-full",
-      "mx-auto"
+      "mx-auto",
+      "flex",
+      "flex-col",
+      "justify-between"
     );
     plantCard.innerHTML = `
-      <figure class="w-full aspect-[1/0.6] bg-gray-200 rounded-lg overflow-hidden">
-        <img src="${plant.image}" alt="" class="w-full h-full object-cover">
-      </figure>
-      <div class="my-3">
-        <h5 class="text-sm">${plant.name}</h5>
-        <p class="text-xs my-1.5">${plant.description}</p>
-        <div class="flex justify-between">
+      <div>
+        <figure class="w-full aspect-[1/0.6] bg-gray-200 rounded-lg overflow-hidden">
+          <img src="${plant.image}" alt="" class="w-full h-full object-cover">
+        </figure>
+        <div class="my-3">
+          <h5 class="text-sm">${plant.name}</h5>
+          <p class="text-xs my-1.5 line-clamp-3" title='${plant.description}'>${plant.description}</p>
+        </div>
+      </div>
+      <div>
+        <div class="flex justify-between mb-2">
             <p class="badge badge-md bg-green-100 text-green-600">${plant.category}</p>
             <span class="font-medium">৳${plant.price}</span>
         </div>
+        <button onclick='addToCart(${plant.id})' class="btn bg-[#15803D] hover:bg-[#065c26] text-white rounded-full w-full">
+          Add to cart
+        </button>
       </div>
-      <button onclick='addToCart(${plant.id})' class="btn bg-[#15803D] hover:bg-[#065c26] text-white rounded-full w-full">
-        Add to cart
-      </button>
     `;
     treeContainer.appendChild(plantCard);
   });
