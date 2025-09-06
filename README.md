@@ -1,4 +1,4 @@
-#### 1) What is the difference between var, let, and const?
+### 1) What is the difference between var, let, and const?
 
 **Answer:**
 
@@ -8,7 +8,7 @@
 
 ---
 
-#### 2) What is the difference between map(), forEach(), and filter()?
+### 2) What is the difference between map(), forEach(), and filter()?
 
 **Answer:**
 
@@ -18,10 +18,10 @@
 
 ---
 
-#### 3) What are arrow functions in ES6?
+### 3) What are arrow functions in ES6?
 
 **Answer:**
-Arrow Functions are shorter version of function expressions. This arrow function was introduced in ES6. Example:
+Arrow Functions are shorter version of function expressions. The "Arrow Function" was introduced in ES6. Example:
 
 ```
 const myFunction = ( a, b ) => a + b;
@@ -29,7 +29,7 @@ const myFunction = ( a, b ) => a + b;
 
 ---
 
-#### 4) How does destructuring assignment work in ES6?
+### 4) How does destructuring assignment work in ES6?
 
 **Answer:**
 We take a piece from an object or array and make it a new reusable variable. Example:
@@ -41,7 +41,7 @@ const { model } = car;
 
 ---
 
-#### 5) Explain template literals in ES6. How are they different from string concatenation?
+### 5) Explain template literals in ES6. How are they different from string concatenation?
 
 **Answer:**
 **Template literals:** Template string is a new effective replacement for string typing. Imagine we need to write a person's info in a string form an object.
