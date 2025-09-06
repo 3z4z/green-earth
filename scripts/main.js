@@ -1,9 +1,29 @@
+// loader function
+const loader = document.getElementById("loader");
+const isLoading = (status) => {
+  status
+    ? [
+        loader.classList.add("flex"),
+        loader.classList.remove("hidden"),
+        document.getElementById("tree-section").classList.add("hidden"),
+      ]
+    : [
+        loader.classList.add("hidden"),
+        loader.classList.remove("flex"),
+        document.getElementById("tree-section").classList.remove("hidden"),
+      ];
+};
+
 // plants
 const getAllPlants = () => {
+  isLoading(true);
   fetch("https://openapi.programming-hero.com/api/plants")
     .then((res) => res.json())
     .then((data) => {
       showAllPlants(data.plants);
+    })
+    .finally(() => {
+      isLoading(false);
     });
 };
 
@@ -24,12 +44,12 @@ const showAllPlants = (plants) => {
       "justify-between"
     );
     plantCard.innerHTML = `
-      <div>
+      <div onclick='getPlantModal(${plant.id})' class='cursor-pointer'>
         <figure class="w-full aspect-[1/0.6] bg-gray-200 rounded-lg overflow-hidden">
           <img src="${plant.image}" alt="" class="w-full h-full object-cover">
         </figure>
         <div class="my-3">
-          <h5 class="text-sm">${plant.name}</h5>
+          <h5 class="text-sm font-semibold">${plant.name}</h5>
           <p class="text-xs my-1.5 line-clamp-3" title='${plant.description}'>${plant.description}</p>
         </div>
       </div>
@@ -78,12 +98,15 @@ const showAllCategories = (categories) => {
 const selectCategory = (id) => {
   fetch(`https://openapi.programming-hero.com/api/category/${id}`)
     .then((res) => res.json())
-    .then((data) => getCategory(data.plants));
+    .then((data) => {
+      getCategory(data.plants);
+    });
 };
 
 const getCategory = (plants) => {
   showAllPlants(plants);
 };
+
 const removeActive = () => {
   const catBtns = treeOptions.querySelectorAll("button");
   catBtns.forEach((catBtn) => {
@@ -104,6 +127,40 @@ const addToCart = (id) => {
     .then((data) => {
       showToCart(data.plants);
     });
+};
+
+const getPlantModal = (id) => {
+  fetch(`https://openapi.programming-hero.com/api/plant/${id}`)
+    .then((res) => res.json())
+    .then((data) => {
+      showPlantModal(data.plants);
+    });
+};
+
+// show tree modal
+const showPlantModal = (plant) => {
+  const plantModal = document.getElementById("plant_modal");
+  plantModal.innerHTML = `
+    <div class="modal-box max-w-3xl">
+    <figure class='mb-6 max-w-sm rounded-lg overflow-hidden mx-auto'>
+      <img src='${plant.image}' class=' max-w-sm'>
+    </figure>
+    <div class='flex items-center'>
+    <h3 class="text-xl font-bold me-4">${plant.name}</h3>
+    <span class='badge bg-green-800/20 text-green-950'>${plant.category}</span>
+    </div>
+    <p class="py-4">${plant.description}</p>
+    
+    <p>Price: <span class='font-semibold'>৳${plant.price}</span></p>
+    <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn bg-green-800 hover:bg-green-900 text-white px-7 rounded-full">Close</button>
+      </form>
+    </div>
+  </div>
+  `;
+  plantModal.showModal();
 };
 
 const cartWrap = document.getElementById("cart-wrap");
@@ -161,6 +218,7 @@ const countCartItem = () => {
   itemCountWrap.innerText = count;
   if (count > 0) {
     itemCountWrap.classList.remove("hidden");
+    itemCountWrap.classList.add("flex");
   } else {
     itemCountWrap.classList.add("hidden");
   }
