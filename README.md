@@ -1,18 +1,20 @@
 #### 1) What is the difference between var, let, and const?
 
 **Answer:**
-**var:** var is a function scoped variable. Can be redeclared inside the function.
-**let:** let is a block scoped. Can be redeclared inside a block where it was declared and also can be accessed in nested blocks. Outside the block, it's inaccessible.
-**const:** const is a block scoped constant variable. Inside a block, it can't be redeclared and must be assign a value during variable declaration.
+
+1. **var:** var is a function scoped variable. Can be redeclared inside the function.
+2. **let:** let is a block scoped. Can be redeclared inside a block where it was declared and also can be accessed in nested blocks. Outside the block, it's inaccessible.
+3. **const:** const is a block scoped constant variable. Inside a block, it can't be redeclared and must be assign a value during variable declaration.
 
 ---
 
 #### 2) What is the difference between map(), forEach(), and filter()?
 
 **Answer:**
-**map():** This map() method calls a callback function on each element of an array and return an array containing results.
-**forEach():** forEach() method is almost similar to map(), but the key difference is: forEach doesn't return something, it just do the loop. On the other hand, map() returns a result.
-**filter():** filter() method returns condition based array output.
+
+1. **map():** This map() method calls a callback function on each element of an array and return an array containing results.
+2. **forEach():** forEach() method is almost similar to map(), but the key difference is: forEach doesn't return something, it just do the loop. On the other hand, map() returns a result.
+3. **filter():** filter() method returns condition based array output.
 
 ---
 
