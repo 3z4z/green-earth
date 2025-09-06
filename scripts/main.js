@@ -163,6 +163,7 @@ const showPlantModal = (plant) => {
   plantModal.showModal();
 };
 
+// cart functionalities
 const cartWrap = document.getElementById("cart-wrap");
 const emptyCart = document.getElementById("empty-cart");
 const totalCart = document.getElementById("total-cart");
@@ -241,7 +242,6 @@ cartWrap.addEventListener("click", (e) => {
   }
 });
 
-//cart item remove
 // executions
 getAllPlants();
 getAllCategories();
