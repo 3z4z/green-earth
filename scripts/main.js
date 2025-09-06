@@ -96,11 +96,13 @@ const showAllCategories = (categories) => {
 };
 
 const selectCategory = (id) => {
+  isLoading(true);
   fetch(`https://openapi.programming-hero.com/api/category/${id}`)
     .then((res) => res.json())
     .then((data) => {
       getCategory(data.plants);
-    });
+    })
+    .finally(() => isLoading(false));
 };
 
 const getCategory = (plants) => {
