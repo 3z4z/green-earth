@@ -12,7 +12,14 @@ const showAllPlants = (plants) => {
   treeContainer.innerHTML = "";
   plants.forEach((plant) => {
     const plantCard = document.createElement("div");
-    plantCard.classList.add("p-4", "bg-white", "rounded-lg");
+    plantCard.classList.add(
+      "p-4",
+      "bg-white",
+      "rounded-lg",
+      "max-w-sm",
+      "sm:max-w-full",
+      "mx-auto"
+    );
     plantCard.innerHTML = `
       <figure class="w-full aspect-[1/0.6] bg-gray-200 rounded-lg overflow-hidden">
         <img src="${plant.image}" alt="" class="w-full h-full object-cover">
@@ -48,7 +55,7 @@ const showAllCategories = (categories) => {
     catBtn.setAttribute("onclick", `selectCategory(${cat.id})`);
     catBtn.classList.add(
       "btn",
-      "w-full",
+      "lg:w-full",
       "justify-start",
       "bg-transparent",
       "border-0",
@@ -96,8 +103,21 @@ const cartWrap = document.getElementById("cart-wrap");
 const emptyCart = document.getElementById("empty-cart");
 const totalCart = document.getElementById("total-cart");
 const cartTitle = document.getElementById("cart-container").querySelector("h4");
+const cartContainer = document.getElementById("cart-container");
 const cartTotalWrap = document.querySelector(".total-cart-wrap");
+const toggleCart = document.getElementById("toggle-cart");
+const itemCountWrap = document.getElementById("item-count");
+toggleCart.addEventListener("click", () => {
+  if (cartContainer.classList.contains("right-[-100%]")) {
+    cartContainer.classList.add("right-0");
+    cartContainer.classList.remove("right-[-100%]");
+  } else {
+    cartContainer.classList.remove("right-0");
+    cartContainer.classList.add("right-[-100%]");
+  }
+});
 let total = 0;
+let count = 0;
 const showToCart = (plant) => {
   if (emptyCart) {
     emptyCart.style.display = "none";
@@ -127,6 +147,16 @@ const showToCart = (plant) => {
   cartTotalWrap.classList.add("flex");
   total += plant.price;
   totalCart.innerText = total;
+  count++;
+  countCartItem();
+};
+const countCartItem = () => {
+  itemCountWrap.innerText = count;
+  if (count > 0) {
+    itemCountWrap.classList.remove("hidden");
+  } else {
+    itemCountWrap.classList.add("hidden");
+  }
 };
 cartWrap.addEventListener("click", (e) => {
   const removeBtn = e.target.closest(".remove-btn");
@@ -135,6 +165,8 @@ cartWrap.addEventListener("click", (e) => {
     removeBtn.parentNode.querySelector(".price").innerText
   );
   total -= price;
+  count--;
+  countCartItem();
   removeBtn.parentNode.remove();
   totalCart.innerText = total;
   if (total === 0 || cartWrap.querySelectorAll(".cart-item").length === 0) {
